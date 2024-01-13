@@ -1,0 +1,1025 @@
+
+Open In Colab
+
+from google.colab import drive
+drive.mount("/content/drive")
+     
+Mounted at /content/drive
+
+import pandas as pd
+url = "/content/drive/MyDrive/creditcard.csv"
+df= pd.read_csv(url)
+df
+
+     
+Time	V1	V2	V3	V4	V5	V6	V7	V8	V9	V10	V11	V12	V13	V14	V15	V16	V17	V18	V19	V20	V21	V22	V23	V24	V25	V26	V27	V28	Amount	Class
+0	0.0	-1.359807	-0.072781	2.536347	1.378155	-0.338321	0.462388	0.239599	0.098698	0.363787	0.090794	-0.551600	-0.617801	-0.991390	-0.311169	1.468177	-0.470401	0.207971	0.025791	0.403993	0.251412	-0.018307	0.277838	-0.110474	0.066928	0.128539	-0.189115	0.133558	-0.021053	149.62	0
+1	0.0	1.191857	0.266151	0.166480	0.448154	0.060018	-0.082361	-0.078803	0.085102	-0.255425	-0.166974	1.612727	1.065235	0.489095	-0.143772	0.635558	0.463917	-0.114805	-0.183361	-0.145783	-0.069083	-0.225775	-0.638672	0.101288	-0.339846	0.167170	0.125895	-0.008983	0.014724	2.69	0
+2	1.0	-1.358354	-1.340163	1.773209	0.379780	-0.503198	1.800499	0.791461	0.247676	-1.514654	0.207643	0.624501	0.066084	0.717293	-0.165946	2.345865	-2.890083	1.109969	-0.121359	-2.261857	0.524980	0.247998	0.771679	0.909412	-0.689281	-0.327642	-0.139097	-0.055353	-0.059752	378.66	0
+3	1.0	-0.966272	-0.185226	1.792993	-0.863291	-0.010309	1.247203	0.237609	0.377436	-1.387024	-0.054952	-0.226487	0.178228	0.507757	-0.287924	-0.631418	-1.059647	-0.684093	1.965775	-1.232622	-0.208038	-0.108300	0.005274	-0.190321	-1.175575	0.647376	-0.221929	0.062723	0.061458	123.50	0
+4	2.0	-1.158233	0.877737	1.548718	0.403034	-0.407193	0.095921	0.592941	-0.270533	0.817739	0.753074	-0.822843	0.538196	1.345852	-1.119670	0.175121	-0.451449	-0.237033	-0.038195	0.803487	0.408542	-0.009431	0.798278	-0.137458	0.141267	-0.206010	0.502292	0.219422	0.215153	69.99	0
+...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...	...
+284802	172786.0	-11.881118	10.071785	-9.834783	-2.066656	-5.364473	-2.606837	-4.918215	7.305334	1.914428	4.356170	-1.593105	2.711941	-0.689256	4.626942	-0.924459	1.107641	1.991691	0.510632	-0.682920	1.475829	0.213454	0.111864	1.014480	-0.509348	1.436807	0.250034	0.943651	0.823731	0.77	0
+284803	172787.0	-0.732789	-0.055080	2.035030	-0.738589	0.868229	1.058415	0.024330	0.294869	0.584800	-0.975926	-0.150189	0.915802	1.214756	-0.675143	1.164931	-0.711757	-0.025693	-1.221179	-1.545556	0.059616	0.214205	0.924384	0.012463	-1.016226	-0.606624	-0.395255	0.068472	-0.053527	24.79	0
+284804	172788.0	1.919565	-0.301254	-3.249640	-0.557828	2.630515	3.031260	-0.296827	0.708417	0.432454	-0.484782	0.411614	0.063119	-0.183699	-0.510602	1.329284	0.140716	0.313502	0.395652	-0.577252	0.001396	0.232045	0.578229	-0.037501	0.640134	0.265745	-0.087371	0.004455	-0.026561	67.88	0
+284805	172788.0	-0.240440	0.530483	0.702510	0.689799	-0.377961	0.623708	-0.686180	0.679145	0.392087	-0.399126	-1.933849	-0.962886	-1.042082	0.449624	1.962563	-0.608577	0.509928	1.113981	2.897849	0.127434	0.265245	0.800049	-0.163298	0.123205	-0.569159	0.546668	0.108821	0.104533	10.00	0
+284806	172792.0	-0.533413	-0.189733	0.703337	-0.506271	-0.012546	-0.649617	1.577006	-0.414650	0.486180	-0.915427	-1.040458	-0.031513	-0.188093	-0.084316	0.041333	-0.302620	-0.660377	0.167430	-0.256117	0.382948	0.261057	0.643078	0.376777	0.008797	-0.473649	-0.818267	-0.002415	0.013649	217.00	0
+284807 rows × 31 columns
+
+
+# Imported Libraries
+
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import tensorflow as tf
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.manifold import TSNE
+from sklearn.decomposition import PCA, TruncatedSVD
+import matplotlib.patches as mpatches
+import time
+
+# Classifier Libraries
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+import collections
+
+# Other Libraries
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from imblearn.pipeline import make_pipeline as imbalanced_make_pipeline
+from imblearn.over_sampling import SMOTE
+from imblearn.under_sampling import NearMiss
+from imblearn.metrics import classification_report_imbalanced
+from sklearn.metrics import precision_score, recall_score, f1_score, roc_auc_score, accuracy_score, classification_report
+from collections import Counter
+from sklearn.model_selection import KFold, StratifiedKFold
+import warnings
+warnings.filterwarnings("ignore")
+
+#color pallete
+
+
+     
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/six.py:31: FutureWarning: The module is deprecated in version 0.21 and will be removed in version 0.23 since we've dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
+  "(https://pypi.org/project/six/).", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.neighbors.base module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.neighbors. Anything that cannot be imported from sklearn.neighbors is now part of the private API.
+  warnings.warn(message, FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/deprecation.py:144: FutureWarning: The sklearn.metrics.classification module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.metrics. Anything that cannot be imported from sklearn.metrics is now part of the private API.
+  warnings.warn(message, FutureWarning)
+
+df.head()
+     
+Time	V1	V2	V3	V4	V5	V6	V7	V8	V9	V10	V11	V12	V13	V14	V15	V16	V17	V18	V19	V20	V21	V22	V23	V24	V25	V26	V27	V28	Amount	Class
+0	0.0	-1.359807	-0.072781	2.536347	1.378155	-0.338321	0.462388	0.239599	0.098698	0.363787	0.090794	-0.551600	-0.617801	-0.991390	-0.311169	1.468177	-0.470401	0.207971	0.025791	0.403993	0.251412	-0.018307	0.277838	-0.110474	0.066928	0.128539	-0.189115	0.133558	-0.021053	149.62	0
+1	0.0	1.191857	0.266151	0.166480	0.448154	0.060018	-0.082361	-0.078803	0.085102	-0.255425	-0.166974	1.612727	1.065235	0.489095	-0.143772	0.635558	0.463917	-0.114805	-0.183361	-0.145783	-0.069083	-0.225775	-0.638672	0.101288	-0.339846	0.167170	0.125895	-0.008983	0.014724	2.69	0
+2	1.0	-1.358354	-1.340163	1.773209	0.379780	-0.503198	1.800499	0.791461	0.247676	-1.514654	0.207643	0.624501	0.066084	0.717293	-0.165946	2.345865	-2.890083	1.109969	-0.121359	-2.261857	0.524980	0.247998	0.771679	0.909412	-0.689281	-0.327642	-0.139097	-0.055353	-0.059752	378.66	0
+3	1.0	-0.966272	-0.185226	1.792993	-0.863291	-0.010309	1.247203	0.237609	0.377436	-1.387024	-0.054952	-0.226487	0.178228	0.507757	-0.287924	-0.631418	-1.059647	-0.684093	1.965775	-1.232622	-0.208038	-0.108300	0.005274	-0.190321	-1.175575	0.647376	-0.221929	0.062723	0.061458	123.50	0
+4	2.0	-1.158233	0.877737	1.548718	0.403034	-0.407193	0.095921	0.592941	-0.270533	0.817739	0.753074	-0.822843	0.538196	1.345852	-1.119670	0.175121	-0.451449	-0.237033	-0.038195	0.803487	0.408542	-0.009431	0.798278	-0.137458	0.141267	-0.206010	0.502292	0.219422	0.215153	69.99	0
+
+
+df.describe()
+     
+Time	V1	V2	V3	V4	V5	V6	V7	V8	V9	V10	V11	V12	V13	V14	V15	V16	V17	V18	V19	V20	V21	V22	V23	V24	V25	V26	V27	V28	Amount	Class
+count	284807.000000	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	2.848070e+05	284807.000000	284807.000000
+mean	94813.859575	3.919560e-15	5.688174e-16	-8.769071e-15	2.782312e-15	-1.552563e-15	2.010663e-15	-1.694249e-15	-1.927028e-16	-3.137024e-15	1.768627e-15	9.170318e-16	-1.810658e-15	1.693438e-15	1.479045e-15	3.482336e-15	1.392007e-15	-7.528491e-16	4.328772e-16	9.049732e-16	5.085503e-16	1.537294e-16	7.959909e-16	5.367590e-16	4.458112e-15	1.453003e-15	1.699104e-15	-3.660161e-16	-1.206049e-16	88.349619	0.001727
+std	47488.145955	1.958696e+00	1.651309e+00	1.516255e+00	1.415869e+00	1.380247e+00	1.332271e+00	1.237094e+00	1.194353e+00	1.098632e+00	1.088850e+00	1.020713e+00	9.992014e-01	9.952742e-01	9.585956e-01	9.153160e-01	8.762529e-01	8.493371e-01	8.381762e-01	8.140405e-01	7.709250e-01	7.345240e-01	7.257016e-01	6.244603e-01	6.056471e-01	5.212781e-01	4.822270e-01	4.036325e-01	3.300833e-01	250.120109	0.041527
+min	0.000000	-5.640751e+01	-7.271573e+01	-4.832559e+01	-5.683171e+00	-1.137433e+02	-2.616051e+01	-4.355724e+01	-7.321672e+01	-1.343407e+01	-2.458826e+01	-4.797473e+00	-1.868371e+01	-5.791881e+00	-1.921433e+01	-4.498945e+00	-1.412985e+01	-2.516280e+01	-9.498746e+00	-7.213527e+00	-5.449772e+01	-3.483038e+01	-1.093314e+01	-4.480774e+01	-2.836627e+00	-1.029540e+01	-2.604551e+00	-2.256568e+01	-1.543008e+01	0.000000	0.000000
+25%	54201.500000	-9.203734e-01	-5.985499e-01	-8.903648e-01	-8.486401e-01	-6.915971e-01	-7.682956e-01	-5.540759e-01	-2.086297e-01	-6.430976e-01	-5.354257e-01	-7.624942e-01	-4.055715e-01	-6.485393e-01	-4.255740e-01	-5.828843e-01	-4.680368e-01	-4.837483e-01	-4.988498e-01	-4.562989e-01	-2.117214e-01	-2.283949e-01	-5.423504e-01	-1.618463e-01	-3.545861e-01	-3.171451e-01	-3.269839e-01	-7.083953e-02	-5.295979e-02	5.600000	0.000000
+50%	84692.000000	1.810880e-02	6.548556e-02	1.798463e-01	-1.984653e-02	-5.433583e-02	-2.741871e-01	4.010308e-02	2.235804e-02	-5.142873e-02	-9.291738e-02	-3.275735e-02	1.400326e-01	-1.356806e-02	5.060132e-02	4.807155e-02	6.641332e-02	-6.567575e-02	-3.636312e-03	3.734823e-03	-6.248109e-02	-2.945017e-02	6.781943e-03	-1.119293e-02	4.097606e-02	1.659350e-02	-5.213911e-02	1.342146e-03	1.124383e-02	22.000000	0.000000
+75%	139320.500000	1.315642e+00	8.037239e-01	1.027196e+00	7.433413e-01	6.119264e-01	3.985649e-01	5.704361e-01	3.273459e-01	5.971390e-01	4.539234e-01	7.395934e-01	6.182380e-01	6.625050e-01	4.931498e-01	6.488208e-01	5.232963e-01	3.996750e-01	5.008067e-01	4.589494e-01	1.330408e-01	1.863772e-01	5.285536e-01	1.476421e-01	4.395266e-01	3.507156e-01	2.409522e-01	9.104512e-02	7.827995e-02	77.165000	0.000000
+max	172792.000000	2.454930e+00	2.205773e+01	9.382558e+00	1.687534e+01	3.480167e+01	7.330163e+01	1.205895e+02	2.000721e+01	1.559499e+01	2.374514e+01	1.201891e+01	7.848392e+00	7.126883e+00	1.052677e+01	8.877742e+00	1.731511e+01	9.253526e+00	5.041069e+00	5.591971e+00	3.942090e+01	2.720284e+01	1.050309e+01	2.252841e+01	4.584549e+00	7.519589e+00	3.517346e+00	3.161220e+01	3.384781e+01	25691.160000	1.000000
+
+# Good No Null Values!
+df.isna().sum().max()
+     
+0
+
+df.columns
+
+     
+Index(['Time', 'V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'V7', 'V8', 'V9', 'V10',
+       'V11', 'V12', 'V13', 'V14', 'V15', 'V16', 'V17', 'V18', 'V19', 'V20',
+       'V21', 'V22', 'V23', 'V24', 'V25', 'V26', 'V27', 'V28', 'Amount',
+       'Class'],
+      dtype='object')
+
+# The classes are heavily skewed we need to solve this issue later.
+print('No Frauds', round(df['Class'].value_counts()[0]/len(df) * 100,2), '% of the dataset')
+print('Frauds', round(df['Class'].value_counts()[1]/len(df) * 100,2), '% of the dataset')
+     
+No Frauds 99.83 % of the dataset
+Frauds 0.17 % of the dataset
+
+
+colors = ["#0101DF", "#DF0101"]
+
+sns.countplot('Class', data=df, palette=colors)
+plt.title('Class Distributions \n (0: No Fraud || 1: Fraud)', fontsize=14)
+     
+Text(0.5, 1.0, 'Class Distributions \n (0: No Fraud || 1: Fraud)')
+
+
+fig, ax = plt.subplots(1, 2, figsize=(18,4))
+
+amount_val = df['Amount'].values
+time_val = df['Time'].values
+
+sns.distplot(amount_val, ax=ax[0], color='r')
+ax[0].set_title('Distribution of Transaction Amount', fontsize=14)
+ax[0].set_xlim([min(amount_val), max(amount_val)])
+
+sns.distplot(time_val, ax=ax[1], color='b')
+ax[1].set_title('Distribution of Transaction Time', fontsize=14)
+ax[1].set_xlim([min(time_val), max(time_val)])
+
+
+
+plt.show()
+     
+
+
+# Since most of our data has already been scaled we should scale the columns that are left to scale (Amount and Time)
+from sklearn.preprocessing import StandardScaler, RobustScaler
+
+# RobustScaler is less prone to outliers.
+
+std_scaler = StandardScaler()
+rob_scaler = RobustScaler()
+
+df['scaled_amount'] = rob_scaler.fit_transform(df['Amount'].values.reshape(-1,1))
+df['scaled_time'] = rob_scaler.fit_transform(df['Time'].values.reshape(-1,1))
+
+df.drop(['Time','Amount'], axis=1, inplace=True)
+
+df.head()
+
+
+
+     
+V1	V2	V3	V4	V5	V6	V7	V8	V9	V10	V11	V12	V13	V14	V15	V16	V17	V18	V19	V20	V21	V22	V23	V24	V25	V26	V27	V28	Class	scaled_amount	scaled_time
+0	-1.359807	-0.072781	2.536347	1.378155	-0.338321	0.462388	0.239599	0.098698	0.363787	0.090794	-0.551600	-0.617801	-0.991390	-0.311169	1.468177	-0.470401	0.207971	0.025791	0.403993	0.251412	-0.018307	0.277838	-0.110474	0.066928	0.128539	-0.189115	0.133558	-0.021053	0	1.783274	-0.994983
+1	1.191857	0.266151	0.166480	0.448154	0.060018	-0.082361	-0.078803	0.085102	-0.255425	-0.166974	1.612727	1.065235	0.489095	-0.143772	0.635558	0.463917	-0.114805	-0.183361	-0.145783	-0.069083	-0.225775	-0.638672	0.101288	-0.339846	0.167170	0.125895	-0.008983	0.014724	0	-0.269825	-0.994983
+2	-1.358354	-1.340163	1.773209	0.379780	-0.503198	1.800499	0.791461	0.247676	-1.514654	0.207643	0.624501	0.066084	0.717293	-0.165946	2.345865	-2.890083	1.109969	-0.121359	-2.261857	0.524980	0.247998	0.771679	0.909412	-0.689281	-0.327642	-0.139097	-0.055353	-0.059752	0	4.983721	-0.994972
+3	-0.966272	-0.185226	1.792993	-0.863291	-0.010309	1.247203	0.237609	0.377436	-1.387024	-0.054952	-0.226487	0.178228	0.507757	-0.287924	-0.631418	-1.059647	-0.684093	1.965775	-1.232622	-0.208038	-0.108300	0.005274	-0.190321	-1.175575	0.647376	-0.221929	0.062723	0.061458	0	1.418291	-0.994972
+4	-1.158233	0.877737	1.548718	0.403034	-0.407193	0.095921	0.592941	-0.270533	0.817739	0.753074	-0.822843	0.538196	1.345852	-1.119670	0.175121	-0.451449	-0.237033	-0.038195	0.803487	0.408542	-0.009431	0.798278	-0.137458	0.141267	-0.206010	0.502292	0.219422	0.215153	0	0.670579	-0.994960
+
+scaled_amount = df['scaled_amount']
+scaled_time = df['scaled_time']
+
+
+df.drop(['scaled_amount', 'scaled_time'], axis=1, inplace=True)
+df.insert(0, 'scaled_amount', scaled_amount)
+df.insert(1, 'scaled_time', scaled_time)
+
+# Amount and Time are Scaled!
+
+df.head()
+
+     
+scaled_amount	scaled_time	V1	V2	V3	V4	V5	V6	V7	V8	V9	V10	V11	V12	V13	V14	V15	V16	V17	V18	V19	V20	V21	V22	V23	V24	V25	V26	V27	V28	Class
+0	1.783274	-0.994983	-1.359807	-0.072781	2.536347	1.378155	-0.338321	0.462388	0.239599	0.098698	0.363787	0.090794	-0.551600	-0.617801	-0.991390	-0.311169	1.468177	-0.470401	0.207971	0.025791	0.403993	0.251412	-0.018307	0.277838	-0.110474	0.066928	0.128539	-0.189115	0.133558	-0.021053	0
+1	-0.269825	-0.994983	1.191857	0.266151	0.166480	0.448154	0.060018	-0.082361	-0.078803	0.085102	-0.255425	-0.166974	1.612727	1.065235	0.489095	-0.143772	0.635558	0.463917	-0.114805	-0.183361	-0.145783	-0.069083	-0.225775	-0.638672	0.101288	-0.339846	0.167170	0.125895	-0.008983	0.014724	0
+2	4.983721	-0.994972	-1.358354	-1.340163	1.773209	0.379780	-0.503198	1.800499	0.791461	0.247676	-1.514654	0.207643	0.624501	0.066084	0.717293	-0.165946	2.345865	-2.890083	1.109969	-0.121359	-2.261857	0.524980	0.247998	0.771679	0.909412	-0.689281	-0.327642	-0.139097	-0.055353	-0.059752	0
+3	1.418291	-0.994972	-0.966272	-0.185226	1.792993	-0.863291	-0.010309	1.247203	0.237609	0.377436	-1.387024	-0.054952	-0.226487	0.178228	0.507757	-0.287924	-0.631418	-1.059647	-0.684093	1.965775	-1.232622	-0.208038	-0.108300	0.005274	-0.190321	-1.175575	0.647376	-0.221929	0.062723	0.061458	0
+4	0.670579	-0.994960	-1.158233	0.877737	1.548718	0.403034	-0.407193	0.095921	0.592941	-0.270533	0.817739	0.753074	-0.822843	0.538196	1.345852	-1.119670	0.175121	-0.451449	-0.237033	-0.038195	0.803487	0.408542	-0.009431	0.798278	-0.137458	0.141267	-0.206010	0.502292	0.219422	0.215153	0
+
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedShuffleSplit
+
+print('No Frauds', round(df['Class'].value_counts()[0]/len(df) * 100,2), '% of the dataset')
+print('Frauds', round(df['Class'].value_counts()[1]/len(df) * 100,2), '% of the dataset')
+
+X = df.drop('Class', axis=1)
+y = df['Class']
+
+sss = StratifiedShuffleSplit(n_splits=5, random_state=None)
+
+for train_index, test_index in sss.split(X, y):
+    print("Train:", train_index, "Test:", test_index)
+    original_Xtrain, original_Xtest = X.iloc[train_index], X.iloc[test_index]
+    original_ytrain, original_ytest = y.iloc[train_index], y.iloc[test_index]
+
+    # We already have X_train and y_train for undersample data thats why I am using original to distinguish and to not overwrite these variables.
+# original_Xtrain, original_Xtest, original_ytrain, original_ytest = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Check the Distribution of the labels
+
+
+# Turn into an array
+original_Xtrain = original_Xtrain.values
+original_Xtest = original_Xtest.values
+original_ytrain = original_ytrain.values
+original_ytest = original_ytest.values
+
+# See if both the train and test label distribution are similarly distributed
+train_unique_label, train_counts_label = np.unique(original_ytrain, return_counts=True)
+test_unique_label, test_counts_label = np.unique(original_ytest, return_counts=True)
+print('-' * 100)
+
+print('Label Distributions: \n')
+print(train_counts_label/ len(original_ytrain))
+print(test_counts_label/ len(original_ytest))
+print(original_Xtrain)
+     
+No Frauds 99.83 % of the dataset
+Frauds 0.17 % of the dataset
+Train: [196138 231034  96313 ...  34747 156643 116833] Test: [ 87408 266568  81821 ... 204325 118036 108870]
+Train: [221490  84140  48220 ... 217905  11416  96009] Test: [249662  94176 180525 ...   9851  66538 168733]
+Train: [ 80780 164338 228202 ...  19334 282326 223674] Test: [270116  43903  19864 ... 229043 216097  17571]
+Train: [ 45977 113956 159467 ... 178891  90130  42456] Test: [253272  42862  88996 ... 119969 117840 175590]
+Train: [103168 152644 263677 ... 146538 278467  51857] Test: [174776 162609  67248 ... 228771  63570 277223]
+----------------------------------------------------------------------------------------------------
+Label Distributions: 
+
+[0.99827173 0.00172827]
+[0.99827955 0.00172045]
+[[-0.23754629 -0.1898636  -1.1033541  ... -0.1684089  -0.02671518
+  -0.03702619]
+ [ 0.23754629  0.14963757  1.89918918 ...  0.43749852 -0.04380784
+  -0.05077059]
+ [ 0.44574862  0.89723798  2.13850725 ... -0.25681211  0.0469006
+  -0.03758762]
+ ...
+ [-0.23754629  0.03591443 -2.30912761 ...  0.40920152  0.49713743
+   0.34153585]
+ [ 0.60071264  0.98151999  2.06004534 ... -0.12004817 -0.00738433
+  -0.04587745]
+ [-0.16614267 -0.46447914 -2.94545259 ...  0.17496185 -0.1509011
+  -0.0588576 ]]
+
+# Since our classes are highly skewed we should make them equivalent in order to have a normal distribution of the classes.
+
+# Lets shuffle the data before creating the subsamples
+
+df = df.sample(frac=1)
+
+# amount of fraud classes 492 rows.
+fraud_df = df.loc[df['Class'] == 1]
+non_fraud_df = df.loc[df['Class'] == 0][:492]
+
+normal_distributed_df = pd.concat([fraud_df, non_fraud_df])
+
+# Shuffle dataframe rows
+new_df = normal_distributed_df.sample(frac=1, random_state=42)
+
+len(new_df)
+     
+984
+
+print('Distribution of the Classes in the subsample dataset')
+print(new_df['Class'].value_counts(normalize=True))
+
+
+
+sns.countplot('Class', data=new_df, palette=colors)
+plt.title('Equally Distributed Classes', fontsize=14)
+plt.show()
+     
+Distribution of the Classes in the subsample dataset
+1    0.5
+0    0.5
+Name: Class, dtype: float64
+
+
+
+f, (ax1, ax2) = plt.subplots(2, 1, figsize=(24,20))
+
+# Entire DataFrame
+corr = df.corr()
+sns.heatmap(corr, cmap='coolwarm_r', annot_kws={'size':20}, ax=ax1)
+
+sub_sample_corr = new_df.corr()
+sns.heatmap(sub_sample_corr, cmap='coolwarm_r', annot_kws={'size':20}, ax=ax2)
+ax2.set_title('SubSample Correlation Matrix \n (use for reference)', fontsize=14)
+plt.show()
+     
+
+
+new_df.corrwith(new_df["Class"])
+     
+scaled_amount    0.101654
+scaled_time     -0.129920
+V1              -0.434155
+V2               0.483170
+V3              -0.572525
+V4               0.688168
+V5              -0.375186
+V6              -0.398506
+V7              -0.475685
+V8               0.058494
+V9              -0.561285
+V10             -0.628543
+V11              0.682681
+V12             -0.683725
+V13             -0.063247
+V14             -0.747034
+V15             -0.043676
+V16             -0.604923
+V17             -0.555682
+V18             -0.469758
+V19              0.274840
+V20              0.173979
+V21              0.126570
+V22              0.015932
+V23             -0.006121
+V24             -0.103160
+V25              0.037197
+V26              0.053927
+V27              0.104952
+V28              0.033648
+Class            1.000000
+dtype: float64
+
+f, axes = plt.subplots(ncols=4, figsize=(20,4))
+
+# Negative Correlations with our Class (The lower our feature value the more likely it will be a fraud transaction)
+sns.boxplot(x="Class", y="V17", data=new_df, palette=colors, ax=axes[0])
+axes[0].set_title('V17 vs Class Negative Correlation')
+
+sns.boxplot(x="Class", y="V14", data=new_df, palette=colors, ax=axes[1])
+axes[1].set_title('V14 vs Class Negative Correlation')
+
+
+sns.boxplot(x="Class", y="V12", data=new_df, palette=colors, ax=axes[2])
+axes[2].set_title('V12 vs Class Negative Correlation')
+
+
+sns.boxplot(x="Class", y="V10", data=new_df, palette=colors, ax=axes[3])
+axes[3].set_title('V10 vs Class Negative Correlation')
+
+plt.show()
+     
+
+
+f, axes = plt.subplots(ncols=2, figsize=(20,4))
+
+# Positive correlations (The higher the feature the probability increases that it will be a fraud transaction)
+sns.boxplot(x="Class", y="V11", data=new_df, palette=colors, ax=axes[0])
+axes[0].set_title('V11 vs Class Positive Correlation')
+
+sns.boxplot(x="Class", y="V4", data=new_df, palette=colors, ax=axes[1])
+axes[1].set_title('V4 vs Class Positive Correlation')
+
+
+
+plt.show()
+     
+
+
+from scipy.stats import norm
+
+f, (ax1, ax2, ax3,ax4,ax5,ax6,) = plt.subplots(1,6, figsize=(20, 6))
+
+v14_fraud_dist = new_df['V14'].loc[new_df['Class'] == 1].values
+sns.distplot(v14_fraud_dist,ax=ax1, fit=norm, color='#FB8861')
+ax1.set_title('V14 Distribution \n (Fraud Transactions)', fontsize=14)
+
+v12_fraud_dist = new_df['V12'].loc[new_df['Class'] == 1].values
+sns.distplot(v12_fraud_dist,ax=ax2, fit=norm, color='#56F9BB')
+ax2.set_title('V12 Distribution \n (Fraud Transactions)', fontsize=14)
+
+
+v10_fraud_dist = new_df['V10'].loc[new_df['Class'] == 1].values
+sns.distplot(v10_fraud_dist,ax=ax3, fit=norm, color='#C5B3F9')
+ax3.set_title('V10 Distribution \n (Fraud Transactions)', fontsize=14)
+
+v17_fraud_dist = new_df['V17'].loc[new_df['Class'] == 1].values
+sns.distplot(v17_fraud_dist,ax=ax4, fit=norm, color='#C5B3F9')
+ax4.set_title('V17 Distribution \n (Fraud Transactions)', fontsize=14)
+
+
+v4_fraud_dist = new_df['V4'].loc[new_df['Class'] == 1].values
+sns.distplot(v4_fraud_dist,ax=ax5, fit=norm, color='#C5B3F9')
+ax5.set_title('V4 Distribution \n (Fraud Transactions)', fontsize=14)
+
+v11_fraud_dist = new_df['V11'].loc[new_df['Class'] == 1].values
+sns.distplot(v11_fraud_dist,ax=ax6, fit=norm, color='#C5B3F9')
+ax6.set_title('V11 Distribution \n (Fraud Transactions)', fontsize=14)
+
+plt.show()
+
+     
+
+
+# # -----> V14 Removing Outliers (Highest Negative Correlated with Labels)
+print(len(new_df))
+v14_fraud = new_df['V14'].loc[new_df['Class'] == 1].values
+q25, q75 = np.percentile(v14_fraud, 25), np.percentile(v14_fraud, 75)
+print('Quartile 25: {} | Quartile 75: {}'.format(q25, q75))
+v14_iqr = q75 - q25
+print('iqr: {}'.format(v14_iqr))
+
+v14_cut_off = v14_iqr * 1.5
+v14_lower, v14_upper = q25 - v14_cut_off, q75 + v14_cut_off
+print('Cut Off: {}'.format(v14_cut_off))
+print('V14 Lower: {}'.format(v14_lower))
+print('V14 Upper: {}'.format(v14_upper))
+
+outliers = [x for x in v14_fraud if x < v14_lower or x > v14_upper]
+print('Feature V14 Outliers for Fraud Cases: {}'.format(len(outliers)))
+print('V14 outliers:{}'.format(outliers))
+
+new_df = new_df.drop(new_df[(new_df['V14'] > v14_upper) | (new_df['V14'] < v14_lower)].index)
+print('Number of Instances after outliers removal: {}'.format(len(new_df)))
+print('----' * 44)
+
+
+
+# -----> V12 removing outliers from fraud transactions
+v12_fraud = new_df['V12'].loc[new_df['Class'] == 1].values
+q25, q75 = np.percentile(v12_fraud, 25), np.percentile(v12_fraud, 75)
+v12_iqr = q75 - q25
+
+v12_cut_off = v12_iqr * 1.5
+v12_lower, v12_upper = q25 - v12_cut_off, q75 + v12_cut_off
+print('V12 Lower: {}'.format(v12_lower))
+print('V12 Upper: {}'.format(v12_upper))
+outliers = [x for x in v12_fraud if x < v12_lower or x > v12_upper]
+print('V12 outliers: {}'.format(outliers))
+print('Feature V12 Outliers for Fraud Cases: {}'.format(len(outliers)))
+new_df= new_df.drop(new_df[(new_df['V12'] > v12_upper) | (new_df['V12'] < v12_lower)].index)
+print('Number of Instances after outliers removal: {}'.format(len(new_df)))
+print('----' * 44)
+
+
+
+# Removing outliers V10 Feature
+v10_fraud = new_df['V10'].loc[new_df['Class'] == 1].values
+q25, q75 = np.percentile(v10_fraud, 25), np.percentile(v10_fraud, 75)
+v10_iqr = q75 - q25
+
+v10_cut_off = v10_iqr * 1.5
+v10_lower, v10_upper = q25 - v10_cut_off, q75 + v10_cut_off
+print('V10 Lower: {}'.format(v10_lower))
+print('V10 Upper: {}'.format(v10_upper))
+outliers = [x for x in v10_fraud if x < v10_lower or x > v10_upper]
+print('V10 outliers: {}'.format(outliers))
+print('Feature V10 Outliers for Fraud Cases: {}'.format(len(outliers)))
+new_df = new_df.drop(new_df[(new_df['V10'] > v10_upper) | (new_df['V10'] < v10_lower)].index)
+print('Number of Instances after outliers removal: {}'.format(len(new_df)))
+print('----' * 44)
+
+
+# Removing outliers V17 Feature
+v17_fraud = new_df['V17'].loc[new_df['Class'] == 1].values
+q25, q75 = np.percentile(v17_fraud, 25), np.percentile(v17_fraud, 75)
+v17_iqr = q75 - q25
+
+v17_cut_off = v17_iqr * 1.5
+v17_lower, v17_upper = q25 - v17_cut_off, q75 + v17_cut_off
+print('V17 Lower: {}'.format(v17_lower))
+print('V17 Upper: {}'.format(v17_upper))
+outliers = [x for x in v17_fraud if x < v17_lower or x > v17_upper]
+print('V17 outliers: {}'.format(outliers))
+print('Feature V17 Outliers for Fraud Cases: {}'.format(len(outliers)))
+new_df = new_df.drop(new_df[(new_df['V17'] > v17_upper) | (new_df['V17'] < v17_lower)].index)
+print('Number of Instances after outliers removal: {}'.format(len(new_df)))
+print('----' * 44)
+
+
+
+# Removing outliers V4 Feature
+v4_fraud = new_df['V4'].loc[new_df['Class'] == 1].values
+q25, q75 = np.percentile(v4_fraud, 25), np.percentile(v4_fraud, 75)
+v4_iqr = q75 - q25
+
+v4_cut_off = v4_iqr * 1.5
+v4_lower, v4_upper = q25 - v4_cut_off, q75 + v4_cut_off
+print('V4 Lower: {}'.format(v4_lower))
+print('V4 Upper: {}'.format(v4_upper))
+outliers = [x for x in v4_fraud if x < v4_lower or x > v4_upper]
+print('V4 outliers: {}'.format(outliers))
+print('Feature V4 Outliers for Fraud Cases: {}'.format(len(outliers)))
+new_df = new_df.drop(new_df[(new_df['V4'] > v4_upper) | (new_df['V4'] < v4_lower)].index)
+print('Number of Instances after outliers removal: {}'.format(len(new_df)))
+print('----' * 44)
+
+
+# Removing outliers V11 Feature
+v11_fraud = new_df['V11'].loc[new_df['Class'] == 1].values
+q25, q75 = np.percentile(v11_fraud, 25), np.percentile(v11_fraud, 75)
+v11_iqr = q75 - q25
+
+v11_cut_off = v11_iqr * 1.5
+v11_lower, v11_upper = q25 - v11_cut_off, q75 + v11_cut_off
+print('V11 Lower: {}'.format(v11_lower))
+print('V11 Upper: {}'.format(v11_upper))
+outliers = [x for x in v11_fraud if x < v11_lower or x > v11_upper]
+print('V11 outliers: {}'.format(outliers))
+print('Feature V11 Outliers for Fraud Cases: {}'.format(len(outliers)))
+new_df = new_df.drop(new_df[(new_df['V11'] > v11_upper) | (new_df['V11'] < v11_lower)].index)
+print('Number of Instances after outliers removal: {}'.format(len(new_df)))
+print('----' * 44)
+     
+984
+Quartile 25: -9.692722964972385 | Quartile 75: -4.282820849486866
+iqr: 5.409902115485519
+Cut Off: 8.114853173228278
+V14 Lower: -17.807576138200663
+V14 Upper: 3.8320323237414122
+Feature V14 Outliers for Fraud Cases: 4
+V14 outliers:[-18.8220867423816, -19.2143254902614, -18.049997689859396, -18.4937733551053]
+Number of Instances after outliers removal: 979
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+V12 Lower: -17.3430371579634
+V12 Upper: 5.776973384895937
+V12 outliers: [-18.683714633344298, -18.553697009645802, -18.4311310279993, -18.047596570821604]
+Feature V12 Outliers for Fraud Cases: 4
+Number of Instances after outliers removal: 975
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+V10 Lower: -14.89885463232024
+V10 Upper: 4.920334958342141
+V10 outliers: [-16.2556117491401, -15.563791338730098, -22.1870885620007, -24.5882624372475, -16.7460441053944, -18.2711681738888, -16.3035376590131, -16.6496281595399, -18.9132433348732, -19.836148851696, -14.9246547735487, -16.6011969664137, -15.346098846877501, -15.2399619587112, -24.403184969972802, -20.949191554361104, -22.1870885620007, -15.2399619587112, -17.141513641289198, -23.2282548357516, -14.9246547735487, -15.1237521803455, -22.1870885620007, -15.2318333653018, -15.563791338730098, -15.124162814494698, -22.1870885620007]
+Feature V10 Outliers for Fraud Cases: 27
+Number of Instances after outliers removal: 946
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+V17 Lower: -23.963221870516776
+V17 Upper: 13.070314875589029
+V17 outliers: [-25.162799369324798, -24.019098547590197]
+Feature V17 Outliers for Fraud Cases: 2
+Number of Instances after outliers removal: 944
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+V4 Lower: -3.4487410963020197
+V4 Upper: 11.706260368390407
+V4 outliers: [11.8249902296814, 11.805469210591301, 11.7861803616399, 11.864868080360699, 11.8447765860728, 11.927511869244, 11.8853128922128, 11.906169907890101]
+Feature V4 Outliers for Fraud Cases: 8
+Number of Instances after outliers removal: 935
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+V11 Lower: -2.5503110364514137
+V11 Upper: 9.198650724481489
+V11 outliers: [9.32879925655782, 10.8530116481991, 11.152490598583698, 10.5452629545898, 10.446846814514, 11.277920727806698, 9.36907905765884, 11.0270590938161, 10.2777688628065]
+Feature V11 Outliers for Fraud Cases: 9
+Number of Instances after outliers removal: 926
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+f,(ax1, ax2, ax3,ax4,ax5,ax6) = plt.subplots(1, 6, figsize=(20,6))
+
+
+# Boxplots with outliers removed
+# Feature V14
+sns.boxplot(x="Class", y="V14", data=new_df,ax=ax1, palette=colors)
+ax1.set_title("V14 Feature \n Reduction of outliers", fontsize=14)
+
+
+# Feature 12
+sns.boxplot(x="Class", y="V12", data=new_df, ax=ax2, palette=colors)
+ax2.set_title("V12 Feature \n Reduction of outliers", fontsize=14)
+
+# Feature V10
+sns.boxplot(x="Class", y="V10", data=new_df, ax=ax3, palette=colors)
+ax3.set_title("V10 Feature \n Reduction of outliers", fontsize=14)
+
+
+
+# Feature V17
+sns.boxplot(x="Class", y="V17", data=new_df, ax=ax4, palette=colors)
+ax4.set_title("V17 Feature \n Reduction of outliers", fontsize=14)
+
+
+
+# Feature V11
+sns.boxplot(x="Class", y="V11", data=new_df, ax=ax5, palette=colors)
+ax5.set_title("V11 Feature \n Reduction of outliers", fontsize=14)
+
+
+
+# Feature V4
+sns.boxplot(x="Class", y="V4", data=new_df, ax=ax6, palette=colors)
+ax6.set_title("V4 Feature \n Reduction of outliers", fontsize=14)
+
+
+
+
+plt.show()
+     
+
+
+new_df
+len(new_df)
+     
+926
+
+X = new_df.drop('Class', axis=1)
+y = new_df['Class']
+
+
+# T-SNE Implementation
+t0 = time.time()
+X_reduced_tsne = TSNE(n_components=2, random_state=42).fit_transform(X.values)
+t1 = time.time()
+print("T-SNE took {:.2} s".format(t1 - t0))
+
+# PCA Implementation
+t0 = time.time()
+X_reduced_pca = PCA(n_components=2, random_state=42).fit_transform(X.values)
+t1 = time.time()
+print("PCA took {:.2} s".format(t1 - t0))
+     
+T-SNE took 6.8 s
+PCA took 0.055 s
+
+f, (ax1, ax2) = plt.subplots(1, 2, figsize=(24,6))
+# labels = ['No Fraud', 'Fraud']
+f.suptitle('Clusters using Dimensionality Reduction', fontsize=14)
+
+
+blue_patch = mpatches.Patch(color='#0A0AFF', label='No Fraud')
+red_patch = mpatches.Patch(color='#AF0000', label='Fraud')
+
+
+# t-SNE scatter plot
+ax1.scatter(X_reduced_tsne[:,0], X_reduced_tsne[:,1], c=(y == 0), cmap='coolwarm', label='No Fraud', linewidths=2)
+ax1.scatter(X_reduced_tsne[:,0], X_reduced_tsne[:,1], c=(y == 1), cmap='coolwarm', label='Fraud', linewidths=2)
+ax1.set_title('t-SNE', fontsize=14)
+
+ax1.grid(True)
+
+ax1.legend(handles=[blue_patch, red_patch])
+
+
+# PCA scatter plot
+ax2.scatter(X_reduced_pca[:,0], X_reduced_pca[:,1], c=(y == 0), cmap='coolwarm', label='No Fraud', linewidths=2)
+ax2.scatter(X_reduced_pca[:,0], X_reduced_pca[:,1], c=(y == 1), cmap='coolwarm', label='Fraud', linewidths=2)
+ax2.set_title('PCA', fontsize=14)
+
+ax2.grid(True)
+
+ax2.legend(handles=[blue_patch, red_patch])
+
+     
+<matplotlib.legend.Legend at 0x7f5db2b45128>
+
+
+# Undersampling before cross validating (prone to overfit)
+X = new_df.drop('Class', axis=1)
+y = new_df['Class']
+     
+
+# Our data is already scaled we should split our training and test sets
+from sklearn.model_selection import train_test_split
+
+# This is explicitly used for undersampling.
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+     
+
+# Turn the values into an array for feeding the classification algorithms.
+X_train = X_train.values
+X_test = X_test.values
+y_train = y_train.values
+y_test = y_test.values
+len(X_train)
+     
+740
+
+# Let's implement simple classifiers
+
+classifiers = {
+    "LogisiticRegression": LogisticRegression(),
+    "KNearest": KNeighborsClassifier(),
+    "Support Vector Classifier": SVC(),
+    "DecisionTreeClassifier": DecisionTreeClassifier()
+}
+     
+
+
+# Wow our scores are getting even high scores even when applying cross validation.
+from sklearn.model_selection import cross_val_score
+
+
+for key, classifier in classifiers.items():
+        validation_score = cross_val_score(classifier, X_train, y_train, cv=5)
+        print("Classifiers: ",classifier.__class__.__name__, "Has a  score of", round(validation_score.mean(), 2) * 100, "% accuracy score")
+     
+Classifiers:  LogisticRegression Has a  score of 93.0 % accuracy score
+Classifiers:  KNeighborsClassifier Has a  score of 93.0 % accuracy score
+Classifiers:  SVC Has a  score of 93.0 % accuracy score
+Classifiers:  DecisionTreeClassifier Has a  score of 91.0 % accuracy score
+
+from sklearn.model_selection import GridSearchCV
+
+
+# Logistic Regression 
+log_reg_params = {"penalty": ['l1', 'l2'], 'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000]}
+
+
+
+grid_log_reg = GridSearchCV(LogisticRegression(), log_reg_params)
+grid_log_reg.fit(X_train, y_train)
+# We automatically get the logistic regression with the best parameters.
+log_reg = grid_log_reg.best_estimator_
+
+knears_params = {"n_neighbors": list(range(2,5,1)), 'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute']}
+
+grid_knears = GridSearchCV(KNeighborsClassifier(), knears_params)
+grid_knears.fit(X_train, y_train)
+# KNears best estimator
+knears_neighbors = grid_knears.best_estimator_
+
+# Support Vector Classifier
+svc_params = {'C': [0.5, 0.7, 0.9, 1], 'kernel': ['rbf', 'poly', 'sigmoid', 'linear']}
+grid_svc = GridSearchCV(SVC(), svc_params)
+grid_svc.fit(X_train, y_train)
+
+# SVC best estimator
+svc = grid_svc.best_estimator_
+
+# DecisionTree Classifier
+tree_params = {"criterion": ["gini", "entropy"], "max_depth": list(range(2,4,1)), 
+              "min_samples_leaf": list(range(5,7,1))}
+grid_tree = GridSearchCV(DecisionTreeClassifier(), tree_params)
+grid_tree.fit(X_train, y_train)
+
+# tree best estimator
+tree_clf = grid_tree.best_estimator_
+     
+
+# Overfitting Case
+
+log_reg_score = cross_val_score(log_reg, X_train, y_train, cv=5)
+print('Logistic Regression Cross Validation Score: ', round(log_reg_score.mean() * 100, 2).astype(str) + '%')
+
+
+knears_score = cross_val_score(knears_neighbors, X_train, y_train, cv=5)
+print('Knears Neighbors Cross Validation Score', round(knears_score.mean() * 100, 2).astype(str) + '%')
+
+svc_score = cross_val_score(svc, X_train, y_train, cv=5)
+print('Support Vector Classifier Cross Validation Score', round(svc_score.mean() * 100, 2).astype(str) + '%')
+
+tree_score = cross_val_score(tree_clf, X_train, y_train, cv=5)
+print('DecisionTree Classifier Cross Validation Score', round(tree_score.mean() * 100, 2).astype(str) + '%')
+     
+Logistic Regression Cross Validation Score:  93.49%
+Knears Neighbors Cross Validation Score 92.82%
+Support Vector Classifier Cross Validation Score 94.04%
+DecisionTree Classifier Cross Validation Score 92.14%
+
+# We will undersample during cross validating
+undersample_X = df.drop('Class', axis=1)
+undersample_y = df['Class']
+
+for train_index, test_index in sss.split(undersample_X, undersample_y):
+    print("Train:", train_index, "Test:", test_index)
+    undersample_Xtrain, undersample_Xtest = undersample_X.iloc[train_index], undersample_X.iloc[test_index]
+    undersample_ytrain, undersample_ytest = undersample_y.iloc[train_index], undersample_y.iloc[test_index]
+    
+undersample_Xtrain = undersample_Xtrain.values
+undersample_Xtest = undersample_Xtest.values
+undersample_ytrain = undersample_ytrain.values
+undersample_ytest = undersample_ytest.values 
+
+undersample_accuracy = []
+undersample_precision = []
+undersample_recall = []
+undersample_f1 = []
+undersample_auc = []
+
+
+# Implementing NearMiss Technique 
+# Distribution of NearMiss (Just to see how it distributes the labels we won't use these variables)
+X_nearmiss, y_nearmiss = NearMiss().fit_sample(undersample_X.values, undersample_y.values)
+print('NearMiss Label Distribution: {}'.format(Counter(y_nearmiss)))
+# Cross Validating the right way
+
+for train, test in sss.split(undersample_Xtrain, undersample_ytrain):
+    undersample_pipeline = imbalanced_make_pipeline(NearMiss(sampling_strategy='majority'), log_reg) # SMOTE happens during Cross Validation not before..
+    undersample_model = undersample_pipeline.fit(undersample_Xtrain[train], undersample_ytrain[train])
+    undersample_prediction = undersample_model.predict(undersample_Xtrain[test])
+    
+    undersample_accuracy.append(undersample_pipeline.score(original_Xtrain[test], original_ytrain[test]))
+    undersample_precision.append(precision_score(original_ytrain[test], undersample_prediction))
+    undersample_recall.append(recall_score(original_ytrain[test], undersample_prediction))
+    undersample_f1.append(f1_score(original_ytrain[test], undersample_prediction))
+    undersample_auc.append(roc_auc_score(original_ytrain[test], undersample_prediction))
+
+     
+
+from sklearn.model_selection import ShuffleSplit
+from sklearn.model_selection import learning_curve
+
+def plot_learning_curve(estimator1, estimator2, estimator3, estimator4, X, y, ylim=None, cv=None,
+                        n_jobs=1, train_sizes=np.linspace(.1, 1.0, 5)):
+    f, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2,2, figsize=(20,14), sharey=True)
+    if ylim is not None:
+        plt.ylim(*ylim)
+    # First Estimator
+    train_sizes, train_scores, test_scores = learning_curve(
+        estimator1, X, y, cv=cv, n_jobs=n_jobs, train_sizes=train_sizes)
+    train_scores_mean = np.mean(train_scores, axis=1)
+    train_scores_std = np.std(train_scores, axis=1)
+    test_scores_mean = np.mean(test_scores, axis=1)
+    test_scores_std = np.std(test_scores, axis=1)
+    ax1.fill_between(train_sizes, train_scores_mean - train_scores_std,
+                     train_scores_mean + train_scores_std, alpha=0.1,
+                     color="#ff9124")
+     ax1.fill_between(train_sizes, test_scores_mean - test_scores_std,
+                     test_scores_mean + test_scores_std, alpha=0.1, color="#2492ff")
+    ax1.plot(train_sizes, train_scores_mean, 'o-', color="#ff9124",
+             label="Training score")
+    ax1.plot(train_sizes, test_scores_mean, 'o-', color="#2492ff",
+             label="Cross-validation score")
+    ax1.set_title("Logistic Regression Learning Curve", fontsize=14)
+    ax1.set_xlabel('Training size (m)')
+    ax1.set_ylabel('Score')
+    ax1.grid(True)
+    ax1.legend(loc="best")
+
+     # Second Estimator 
+    train_sizes, train_scores, test_scores = learning_curve(
+        estimator2, X, y, cv=cv, n_jobs=n_jobs, train_sizes=train_sizes)
+    train_scores_mean = np.mean(train_scores, axis=1)
+    train_scores_std = np.std(train_scores, axis=1)
+    test_scores_mean = np.mean(test_scores, axis=1)
+    test_scores_std = np.std(test_scores, axis=1)
+    ax2.fill_between(train_sizes, train_scores_mean - train_scores_std,
+                     train_scores_mean + train_scores_std, alpha=0.1,
+                     color="#ff9124")
+    ax2.fill_between(train_sizes, test_scores_mean - test_scores_std,
+                     test_scores_mean + test_scores_std, alpha=0.1, color="#2492ff")
+    ax2.plot(train_sizes, train_scores_mean, 'o-', color="#ff9124",
+             label="Training score")
+    ax2.plot(train_sizes, test_scores_mean, 'o-', color="#2492ff",
+             label="Cross-validation score")
+    ax2.set_title("Knears Neighbors Learning Curve", fontsize=14)
+    ax2.set_xlabel('Training size (m)')
+    ax2.set_ylabel('Score')
+    ax2.grid(True)
+    ax2.legend(loc="best")
+    
+    # Third Estimator
+    train_sizes, train_scores, test_scores = learning_curve(
+        estimator3, X, y, cv=cv, n_jobs=n_jobs, train_sizes=train_sizes)
+    train_scores_mean = np.mean(train_scores, axis=1)
+    train_scores_std = np.std(train_scores, axis=1)
+    test_scores_mean = np.mean(test_scores, axis=1)
+    test_scores_std = np.std(test_scores, axis=1)
+    ax3.fill_between(train_sizes, train_scores_mean - train_scores_std,
+                     train_scores_mean + train_scores_std, alpha=0.1,
+                     color="#ff9124")
+    ax3.fill_between(train_sizes, test_scores_mean - test_scores_std,
+                     test_scores_mean + test_scores_std, alpha=0.1, color="#2492ff")
+    ax3.plot(train_sizes, train_scores_mean, 'o-', color="#ff9124",
+             label="Training score")
+      ax3.plot(train_sizes, test_scores_mean, 'o-', color="#2492ff",
+             label="Cross-validation score")
+    ax3.set_title("Support Vector Classifier \n Learning Curve", fontsize=14)
+    ax3.set_xlabel('Training size (m)')
+    ax3.set_ylabel('Score')
+    ax3.grid(True)
+    ax3.legend(loc="best")
+    
+    # Fourth Estimator
+    train_sizes, train_scores, test_scores = learning_curve(
+        estimator4, X, y, cv=cv, n_jobs=n_jobs, train_sizes=train_sizes)
+    train_scores_mean = np.mean(train_scores, axis=1)
+    train_scores_std = np.std(train_scores, axis=1)
+    test_scores_mean = np.mean(test_scores, axis=1)
+    test_scores_std = np.std(test_scores, axis=1)
+    ax4.fill_between(train_sizes, train_scores_mean - train_scores_std,
+                     train_scores_mean + train_scores_std, alpha=0.1,
+                     color="#ff9124")
+    ax4.fill_between(train_sizes, test_scores_mean - test_scores_std,
+                     test_scores_mean + test_scores_std, alpha=0.1, color="#2492ff")
+    ax4.plot(train_sizes, train_scores_mean, 'o-', color="#ff9124",
+             label="Training score")
+    ax4.plot(train_sizes, test_scores_mean, 'o-', color="#2492ff",
+             label="Cross-validation score")
+    ax4.set_title("Decision Tree Classifier \n Learning Curve", fontsize=14)
+    ax4.set_xlabel('Training size (m)')
+    ax4.set_ylabel('Score')
+    ax4.grid(True)
+    ax4.legend(loc="best")
+    return plt
+     
+
+cv = ShuffleSplit(n_splits=100, test_size=0.2, random_state=42)
+plot_learning_curve(log_reg, knears_neighbors, svc, tree_clf, X_train, y_train, (0.87, 1.01), cv=cv, n_jobs=4)
+
+     
+
+from sklearn.metrics import roc_curve
+from sklearn.model_selection import cross_val_predict
+# Create a DataFrame with all the scores and the classifiers names.
+
+log_reg_pred = cross_val_predict(log_reg, X_train, y_train, cv=5,
+                             method="decision_function")
+
+knears_pred = cross_val_predict(knears_neighbors, X_train, y_train, cv=5)
+
+svc_pred = cross_val_predict(svc, X_train, y_train, cv=5,
+                             method="decision_function")
+
+tree_pred = cross_val_predict(tree_clf, X_train, y_train, cv=5)
+     
+
+from sklearn.metrics import roc_auc_score
+
+print('Logistic Regression: ', roc_auc_score(y_train, log_reg_pred))
+print('KNears Neighbors: ', roc_auc_score(y_train, knears_pred))
+print('Support Vector Classifier: ', roc_auc_score(y_train, svc_pred))
+print('Decision Tree Classifier: ', roc_auc_score(y_train, tree_pred))
+     
+
+log_fpr, log_tpr, log_thresold = roc_curve(y_train, log_reg_pred)
+knear_fpr, knear_tpr, knear_threshold = roc_curve(y_train, knears_pred)
+svc_fpr, svc_tpr, svc_threshold = roc_curve(y_train, svc_pred)
+tree_fpr, tree_tpr, tree_threshold = roc_curve(y_train, tree_pred)
+
+def graph_roc_curve_multiple(log_fpr, log_tpr, knear_fpr, knear_tpr, svc_fpr, svc_tpr, tree_fpr, tree_tpr):
+    plt.figure(figsize=(16,8))
+    plt.title('ROC Curve \n Top 4 Classifiers', fontsize=18)
+    plt.plot(log_fpr, log_tpr, label='Logistic Regression Classifier Score: {:.4f}'.format(roc_auc_score(y_train, log_reg_pred)))
+    plt.plot(knear_fpr, knear_tpr, label='KNears Neighbors Classifier Score: {:.4f}'.format(roc_auc_score(y_train, knears_pred)))
+    plt.plot(svc_fpr, svc_tpr, label='Support Vector Classifier Score: {:.4f}'.format(roc_auc_score(y_train, svc_pred)))
+    plt.plot(tree_fpr, tree_tpr, label='Decision Tree Classifier Score: {:.4f}'.format(roc_auc_score(y_train, tree_pred)))
+    plt.plot([0, 1], [0, 1], 'k--')
+    plt.axis([-0.01, 1, 0, 1])
+    plt.xlabel('False Positive Rate', fontsize=16)
+    plt.ylabel('True Positive Rate', fontsize=16)
+    plt.annotate('Minimum ROC Score of 50% \n (This is the minimum score to get)', xy=(0.5, 0.5), xytext=(0.6, 0.3),
+                arrowprops=dict(facecolor='#6E726D', shrink=0.05),
+                )
+    plt.legend()
+    
+graph_roc_curve_multiple(log_fpr, log_tpr, knear_fpr, knear_tpr, svc_fpr, svc_tpr, tree_fpr, tree_tpr)
+plt.show()
+     
+
+sm = SMOTE(random_state=42)
+X_res, y_res = sm.fit_resample(original_Xtrain, original_ytrain)
+     
+
+ validation_score = cross_val_score(LogisticRegression(), X_res, y_res, cv=5)
+ print("Classifiers: LogisticRegression Has a  score of", round(validation_score.mean(), 2) * 100, "% accuracy score")
+     
+Classifiers: LogisticRegression Has a  score of 95.0 % accuracy score
+
+ validation_score = cross_val_score(KNeighborsClassifier(), X_res, y_res, cv=5)
+ print("Classifiers: KNeighborsClassifier Has a  score of", round(validation_score.mean(), 2) * 100, "% accuracy score")
+     
+Classifiers: KNeighborsClassifier Has a  score of 100.0 % accuracy score
+
+ validation_score = cross_val_score(SVC(), X_res, y_res, cv=5)
+ print("Classifiers: SVC Has a  score of", round(validation_score.mean(), 2) * 100, "% accuracy score")
+     
+Classifiers: SVC Has a  score of 98.0 % accuracy score
+
+validation_score = cross_val_score(DecisionTreeClassifier(), X_res, y_res, cv=5)
+print("Classifiers: Decision Tree Classifier Has a  score of", round(validation_score.mean(), 2) * 100, "% accuracy score")
+     
+Classifiers: Decision Tree Classifier Has a  score of 100.0 % accuracy score
+
+
+     
+
+#KNN
+knears_params = {"n_neighbors": list(range(2,5,1)), 'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute']}
+
+grid_knears = GridSearchCV(KNeighborsClassifier(), knears_params)
+grid_knears.fit(X_res, y_res)
+# KNears best estimator
+knears_neighbors = grid_knears.best_estimator_
+     
+
+# Support Vector Classifier
+svc_params = {'C': [0.5, 0.7, 0.9, 1], 'kernel': ['rbf', 'poly', 'sigmoid', 'linear']}
+grid_svc = GridSearchCV(SVC(), svc_params)
+grid_svc.fit(X_res, y_res)
+
+# SVC best estimator
+svc = grid_svc.best_estimator_
+     
+
+
+# DecisionTree Classifier
+tree_params = {"criterion": ["gini", "entropy"], "max_depth": list(range(2,4,1)), 
+              "min_samples_leaf": list(range(5,7,1))}
+grid_tree = GridSearchCV(DecisionTreeClassifier(), tree_params)
+grid_tree.fit(X_res, y_res)
+
+# tree best estimator
+tree_clf = grid_tree.best_estimator_
+     
+
+# Overfitting Case
+
+log_reg_score = cross_val_score(log_reg, X_res, y_res, cv=5)
+print('Logistic Regression Cross Validation Score: ', round(log_reg_score.mean() * 100, 2).astype(str) + '%')
+
+
+knears_score = cross_val_score(knears_neighbors, X_res, y_res, cv=5)
+print('Knears Neighbors Cross Validation Score', round(knears_score.mean() * 100, 2).astype(str) + '%')
+
+svc_score = cross_val_score(svc, X_res, y_res, cv=5)
+print('Support Vector Classifier Cross Validation Score', round(svc_score.mean() * 100, 2).astype(str) + '%')
+
+tree_score = cross_val_score(tree_clf, X_res, y_res, cv=5)
+print('DecisionTree Classifier Cross Validation Score', round(tree_score.mean() * 100, 2).astype(str) + '%')
+     
+Logistic Regression Cross Validation Score:  93.49%
+Knears Neighbors Cross Validation Score 92.82%
+Support Vector Classifier Cross Validation Score 94.04%
+DecisionTree Classifier Cross Validation Score 92.14%
